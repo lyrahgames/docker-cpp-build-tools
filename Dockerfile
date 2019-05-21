@@ -19,3 +19,14 @@ run \
   && rm -rf /var/lib/apt/lists/* \
   && pip3 install \
     meson
+
+# install latest fmt format library
+workdir /tmp
+run git clone https://github.com/fmtlib/fmt.git --depth=1 --branch master --single-branch
+workdir fmt/build
+run \
+  cmake -D CMAKE_BUILD_TYPE=Release .. && \
+  cmake --build . && \
+  cmake --build . --target install
+workdir /
+run rm -rf /tmp/fmt
