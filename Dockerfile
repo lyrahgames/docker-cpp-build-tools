@@ -1,4 +1,4 @@
-from lyrahgames/gcc-cmake:latest
+from gcc:latest
 
 label maintainer="markuspawellek@gmail.com"
 
@@ -16,9 +16,31 @@ run \
     python3 \
     python3-pip \
     libboost-all-dev \
+  && apt-get remove -y \
+    libboost-all-dev \
   && rm -rf /var/lib/apt/lists/* \
   && pip3 install \
     meson
+
+# install latest Boost library
+workdir /tmp
+run \
+  git clone https://github.com/boostorg/boost.git --recursive --depth=1 --branch master --single-branch boost
+workdir boost
+run \
+  ./bootstrap.sh && \
+  ./b2 release && \
+  ./b2 install
+workdir /
+run rm -rf /tmp/boost
+
+# install latest CMake build system generator
+workdir /tmp
+run git clone https://github.com/Kitware/CMake.git --depth=1 --branch release --single-branch cmake
+workdir cmake
+run ./bootstrap && make && make install
+workdir /
+run rm -rf /tmp/cmake
 
 # install latest fmt format library
 workdir /tmp

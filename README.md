@@ -14,9 +14,9 @@
 
 ## Tools
 - [GCC](https://gcc.gnu.org/)
+- [Boost](https://www.boost.org/)
 - [CMake](https://cmake.org/)
+- [{fmt}](https://fmt.dev/latest/index.html)
 - [Ninja](https://ninja-build.org/)
 - [Python3](https://www.python.org/)
 - [Meson](http://mesonbuild.com/)
-- [Boost](https://www.boost.org/)
-- [{fmt}](https://fmt.dev/latest/index.html)
